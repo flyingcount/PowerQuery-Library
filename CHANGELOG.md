@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 - `fxNullIfBlank` (`src/CleanseTables/`) — replace empty or whitespace-only text with `null` (optional column list).
+- `fxAddDateParts` (`src/Dates/`) — add Year, Quarter, Month, Week, and day-of-week columns from a date/datetime field.
 
 ## [0.1.0] - 2026-08-08
 
