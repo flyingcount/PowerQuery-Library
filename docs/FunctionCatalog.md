@@ -2,7 +2,7 @@
 
 Generated from the Power Query library source files. Each entry links to its .pq file.
 
-**Total functions:** 31
+**Total functions:** 32
 
 ## AddColumn
 
@@ -40,6 +40,7 @@ Generated from the Power Query library source files. Each entry links to its .pq
 |----------|-------------|------|
 | fxCleanAllText | Dynamically identifies all columns containing 'text' data types | [src/CleanseTables/fxCleanAllText.pq](../src/CleanseTables/fxCleanAllText.pq) |
 | fxCleanNulls | _No description_ | [src/CleanseTables/fxCleanNulls.pq](../src/CleanseTables/fxCleanNulls.pq) |
+| fxNullIfBlank | Replaces empty or whitespace-only text values with null. | [src/CleanseTables/fxNullIfBlank.pq](../src/CleanseTables/fxNullIfBlank.pq) |
 | fxTrimAll | Trims whitespace from text cells while preserving numbers, dates, and other types. Does not trim the column header | [src/CleanseTables/fxTrimAll.pq](../src/CleanseTables/fxTrimAll.pq) |
 
 ## ControlCharts
