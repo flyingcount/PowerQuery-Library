@@ -1,0 +1,24 @@
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Excel / Office temp
+~$*
+*.tmp
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Local extracts / build artifacts
+catalog.json
+Data/Section1.m
+**/__pycache__/
+node_modules/
+
+# Source workbooks (local only; keep functions under src/)
+Data/*.xlsb
+Data/*.xlsx
+Data/*.xlsm
