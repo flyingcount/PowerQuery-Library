@@ -2,7 +2,7 @@
 
 Generated from the Power Query library source files. Each entry links to its .pq file.
 
-**Total functions:** 37
+**Total functions:** 38
 
 ## AddColumn
 
@@ -65,6 +65,8 @@ Generated from the Power Query library source files. Each entry links to its .pq
 |----------|-------------|------|
 | fxAddDateParts | Adds common calendar attributes from a date/datetime column. | [src/Dates/fxAddDateParts.pq](../src/Dates/fxAddDateParts.pq) |
 | fxCombineTablesByPrefix | Dynamically finds and expands all Excel tables that start with a specific text. | [src/Dates/fxCombineTablesByPrefix.pq](../src/Dates/fxCombineTablesByPrefix.pq) |
+| fxCreateDateTable | Creates a calendar / date-dimension table for Excel PQ or Power BI (incl. day short name, weekday/weekend/working day; uses HolidaysList by default). | [src/Dates/fxCreateDateTable.pq](../src/Dates/fxCreateDateTable.pq) |
+| HolidaysList | Editable holidays table (seed: 2026 England & Wales bank holidays). Companion to fxCreateDateTable. | [src/Dates/HolidaysList.pq](../src/Dates/HolidaysList.pq) |
 
 ## Files
 

@@ -9,6 +9,9 @@
     Function: fxGenerateDateTable
     Description: Generates a complete calendar table based on a dynamic range.
     Usage: fxGenerateDateTable(#date(2023, 1, 1), #date(2026, 12, 31))
+
+    Prefer fxCreateDateTable (src/Dates/) for new work — adds Day, Quarter,
+    and optional fiscal columns; same Excel PQ / Power BI compatibility.
 */
 (StartDate as date, EndDate as date) =>
 let
