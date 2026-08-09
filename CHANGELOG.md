@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - `fxAddDateParts` (`src/Dates/`) — add Year, Quarter, Month, Week, and day-of-week columns from a date/datetime field.
 - `fxCombineFolderFiles` (`src/Files/`) — combine CSV/Excel files from a folder with `SourceFileName`.
 - `fxExpandExcelSheets` (`src/Files/`) — append workbook sheets (optional name pattern) with `SourceSheet`.
+- `fxMasterDataV02` (`src/DataPreProcessing/`) — combine and deduplicate a key column from two queries into a text master list.
 
 ### Changed
 - Moved VBA scaffold and Personal workbook material to [Excel-VBA-Library](https://github.com/flyingcount/Excel-VBA-Library).
