@@ -8,30 +8,39 @@
 | A1 | 2 |
 | B2 | 3 |
 | null | 4 |
+| `""` | 5 |
+| `   ` | 6 |
+| C3 | 7 |
 
 ## Input — Table2 (`Inventory`)
 
 | ItemCode | OnHand |
 |----------|--------|
 | B2 | 10 |
-| C3 | 5 |
+| c4 | 5 |
 |  | 0 |
+| 100 | 1 |
 
 ## Steps
 
 1. Load both tables in Power Query.
 2. Invoke `fxMasterDataV02(Sales, "SKU", Inventory, "ItemCode")`.
-3. Optionally invoke with blank `ColName2` when both tables share `"SKU"`: `fxMasterDataV02(Sales, "SKU", Inventory2)`.
+3. Optionally invoke with whitespace-only `ColName2` (should default to `"SKU"` when both tables share that header).
+4. Optionally rename a header to `"SKU "` and invoke with `"SKU"` — column should still resolve.
 
 ## Expected
 
 | SKU |
 |-----|
+| 100 |
 | A1 |
 | B2 |
 | C3 |
+| c4 |
 
-- Nulls / blanks removed.
+- Nulls, `""`, and whitespace-only text removed.
+- Numeric `100` coerced to text `"100"`.
 - Duplicates within and across tables collapsed once.
+- Result sorted ascending.
 - Result column named from cleaned `ColName1` (`SKU`), typed as text.
-- Overlapping key `B2` appears once.
+- Missing column should error with `Column not found: …`.

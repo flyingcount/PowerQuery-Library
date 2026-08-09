@@ -55,7 +55,7 @@ Generated from the Power Query library source files. Each entry links to its .pq
 |----------|-------------|------|
 | fxApplyMetadataAndTypes | Orchestrates a metadata-driven ETL transformation. | [src/DataPreProcessing/fxApplyMetadataAndTypes.pq](../src/DataPreProcessing/fxApplyMetadataAndTypes.pq) |
 | fxGetTableMetadata | Returns a table with Index, Column Name, Duplicate, Type, and a "Keep Y/N" flag. | [src/DataPreProcessing/fxGetTableMetadata.pq](../src/DataPreProcessing/fxGetTableMetadata.pq) |
-| fxMasterDataV02 | Combines and deduplicates a key column from two queries into a master list. | [src/DataPreProcessing/fxMasterDataV02.pq](../src/DataPreProcessing/fxMasterDataV02.pq) |
+| fxMasterDataV02 | Combines and deduplicates a key column from two queries into a sorted text master list. | [src/DataPreProcessing/fxMasterDataV02.pq](../src/DataPreProcessing/fxMasterDataV02.pq) |
 | fxRandomSampleDefault10Percent | Performs a statistically random sample of an input table. | [src/DataPreProcessing/fxRandomSampleDefault10Percent.pq](../src/DataPreProcessing/fxRandomSampleDefault10Percent.pq) |
 
 ## Dates

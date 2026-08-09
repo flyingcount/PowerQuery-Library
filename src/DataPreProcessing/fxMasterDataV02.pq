@@ -9,9 +9,9 @@
 
 /*
     Function: fxMasterDataV02
-    Description: Safely trims column headers, pre-shrinks and deduplicates lists
-                 individually, combines them, cleans out errors/blanks, and returns
-                 a single master table (typed as text).
+    Description: Resolves columns by trimmed header name, cleans errors/blanks,
+                 pre-deduplicates each source list (important for large tables),
+                 combines them, deduplicates again, sorts, and returns a text master table.
     Author: Paul Chan
     Date: 2026-08-09
 
@@ -33,40 +33,46 @@ let
         optional ColName2 as text
     ) as table =>
     let
-        // Trim headers so "SKU " vs "SKU" does not cause Column not found
-        CleanTable1 = Table.RenameColumns(
-            Table1,
-            List.Zip({
-                Table.ColumnNames(Table1),
-                List.Transform(Table.ColumnNames(Table1), Text.Trim)
-            })
-        ),
-        CleanTable2 = Table.RenameColumns(
-            Table2,
-            List.Zip({
-                Table.ColumnNames(Table2),
-                List.Transform(Table.ColumnNames(Table2), Text.Trim)
-            })
-        ),
-
         CleanColName1 = Text.Trim(ColName1),
         CleanColName2 =
-            if ColName2 = null or ColName2 = "" then
+            if ColName2 = null or Text.Trim(ColName2) = "" then
                 CleanColName1
             else
                 Text.Trim(ColName2),
 
-        RawList1 = Table.Column(CleanTable1, CleanColName1),
-        RawList2 = Table.Column(CleanTable2, CleanColName2),
+        // Resolve one column by trimmed header (avoids renaming the whole table)
+        CleanKeys = (tbl as table, col as text) as list =>
+        let
+            Names = Table.ColumnNames(tbl),
+            Match = List.Select(Names, each Text.Trim(_) = col),
+            Resolved =
+                if List.IsEmpty(Match) then
+                    error "Column not found: " & col
+                else
+                    Match{0},
+            Raw = Table.Column(tbl, Resolved),
+            Cleaned = List.Transform(
+                Raw,
+                each
+                    let
+                        Value = try _ otherwise null
+                    in
+                        if Value = null then
+                            null
+                        else if Value is text and Text.Trim(Value) = "" then
+                            null
+                        else
+                            Text.From(Value)
+            )
+        in
+            List.Distinct(List.RemoveNulls(Cleaned)),
 
-        NoErrorList1 = List.Transform(RawList1, each try _ otherwise null),
-        NoErrorList2 = List.Transform(RawList2, each try _ otherwise null),
-
-        CleanList1 = List.Distinct(List.RemoveNulls(NoErrorList1)),
-        CleanList2 = List.Distinct(List.RemoveNulls(NoErrorList2)),
+        // Pre-shrink each source before combine (helps ~500k-row inputs)
+        CleanList1 = CleanKeys(Table1, CleanColName1),
+        CleanList2 = CleanKeys(Table2, CleanColName2),
 
         CombinedList = List.Combine({CleanList1, CleanList2}),
-        FinalList = List.Distinct(CombinedList),
+        FinalList = List.Sort(List.Distinct(CombinedList)),
 
         ResultTable = Table.FromList(
             FinalList,
@@ -110,7 +116,7 @@ let
         )
     ) as table meta [
         Documentation.Name = "fxMasterDataV02",
-        Documentation.LongDescription = "Safely trims all column headers, pre-shrinks and deduplicates lists individually, combines them, cleans out errors/blanks, and returns a single, bulletproof master table."
+        Documentation.LongDescription = "Resolves columns by trimmed header name, cleans errors/blanks, pre-deduplicates each source list, combines them, deduplicates again, sorts, and returns a text master table."
     ]
 in
     Value.ReplaceType(CombineAndDeduplicate, FunctionType)
