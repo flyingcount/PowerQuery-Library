@@ -31,13 +31,13 @@
 
     Example:
         fxCreateDateTable(#date(2026, 1, 1), #date(2026, 12, 31))
-        fxCreateDateTable(#date(2026, 4, 1), #date(2027, 3, 31), 4)
+        fxCreateDateTable(#date(2026, 4, 1), #date(2027, 3, 31), 4)  // April fiscal year start
         fxCreateDateTable(#date(2026, 1, 1), #date(2026, 12, 31), 1, {#date(2026, 12, 24)})
 
     Power BI tip: mark the date query as a Date table and set Date as the key column.
 */
 let
-    Source = (
+    CreateDateTable = (
         StartDate as date,
         EndDate as date,
         optional FiscalYearStartMonth as nullable number,
@@ -175,6 +175,36 @@ let
 
     Typed = Table.TransformColumnTypes(WithFiscalPeriod, {{"Date", type date}})
 in
-    Typed
+    Typed,
+
+    FunctionType = type function (
+        StartDate as (
+            type date meta [
+                Documentation.FieldCaption = "Start Date",
+                Documentation.FieldDescription = "First date in the calendar (e.g. 01/01/2026)."
+            ]
+        ),
+        EndDate as (
+            type date meta [
+                Documentation.FieldCaption = "End Date",
+                Documentation.FieldDescription = "Last date in the calendar (e.g. 31/12/2026)."
+            ]
+        ),
+        optional FiscalYearStartMonth as (
+            type nullable number meta [
+                Documentation.FieldCaption = "Fiscal Year Start Month (Optional)",
+                Documentation.FieldDescription = "Month number when the fiscal year begins (1–12). Example: enter 4 for an April fiscal year start. Leave blank or 1 for a calendar year (January)."
+            ]
+        ),
+        optional Holidays as (
+            type nullable list meta [
+                Documentation.FieldCaption = "Holidays (Optional)",
+                Documentation.FieldDescription = "Optional list of holiday dates. Leave blank to use the HolidaysList query if it exists; otherwise weekdays only."
+            ]
+        )
+    ) as table meta [
+        Documentation.Name = "fxCreateDateTable",
+        Documentation.LongDescription = "Creates a calendar / date-dimension table. Example with April fiscal year: fxCreateDateTable(#date(2026, 4, 1), #date(2027, 3, 31), 4)."
+    ]
 in
-    Source
+    Value.ReplaceType(CreateDateTable, FunctionType)
