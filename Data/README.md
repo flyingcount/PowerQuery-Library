@@ -2,8 +2,9 @@
 
 | File | Role |
 |------|------|
-| `Personal123.xlsb` | Personal macro workbook (VBA + PQ); local only, gitignored |
 | `Section1.m` | Extracted Power Query mashup section (optional working copy) |
+
+Personal VBA workbook and add-in source moved to [Excel-VBA-Library](https://github.com/flyingcount/Excel-VBA-Library).
 
 To refresh individual `.pq` files after editing queries in Excel:
 

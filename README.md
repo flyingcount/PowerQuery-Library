@@ -4,7 +4,7 @@ Reusable **Power Query (M)** functions for Excel and Power BI — cleansing, pro
 
 Originally curated in a personal workbook (`Data/Personal.xlsb`) and organised here as a GitHub-friendly source library.
 
-Power Query M lives under `src/`. VBA add-in source lives under `vba/` (see [vba/README.md](vba/README.md)).
+Power Query M lives under `src/`. Excel VBA lives in a separate repo: [Excel-VBA-Library](https://github.com/flyingcount/Excel-VBA-Library).
 
 ## Repository layout
 
@@ -14,10 +14,6 @@ Power Query M lives under `src/`. VBA add-in source lives under `vba/` (see [vba
 ├── CHANGELOG.md
 ├── LICENSE
 ├── src/                    ← Power Query (.pq)
-├── vba/
-│   ├── docs/               ← export/import + module map
-│   ├── source/Api|Internal ← VBA (.bas) for .xlam library
-│   └── build/              ← local PowerQueryVbaLib.xlam
 ├── examples/
 ├── templates/
 ├── tests/

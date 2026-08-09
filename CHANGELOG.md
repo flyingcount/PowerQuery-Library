@@ -12,9 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - `fxAddDateParts` (`src/Dates/`) — add Year, Quarter, Month, Week, and day-of-week columns from a date/datetime field.
 - `fxCombineFolderFiles` (`src/Files/`) — combine CSV/Excel files from a folder with `SourceFileName`.
 - `fxExpandExcelSheets` (`src/Files/`) — append workbook sheets (optional name pattern) with `SourceSheet`.
-- VBA library scaffold under `vba/` (Api/Internal modules, export/import notes, module map) for migrating Personal macros into an `.xlam`.
-- Inventory notes for `Personal123.xlsb` export (`vba/docs/PersonalInventory.md`); shared helpers already concentrated in `aPublicProcedures`.
-- Infrastructure catalog (`vba/docs/InfrastructureCatalog.md`) classifying core plumbing vs feature code vs `z*` templates, including variant counts.
+
+### Changed
+- Moved VBA scaffold and Personal workbook material to [Excel-VBA-Library](https://github.com/flyingcount/Excel-VBA-Library).
 
 ## [0.1.0] - 2026-08-08
 
