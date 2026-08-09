@@ -2,7 +2,7 @@
 
 Generated from the Power Query library source files. Each entry links to its .pq file.
 
-**Total functions:** 33
+**Total functions:** 35
 
 ## AddColumn
 
@@ -63,6 +63,13 @@ Generated from the Power Query library source files. Each entry links to its .pq
 |----------|-------------|------|
 | fxAddDateParts | Adds common calendar attributes from a date/datetime column. | [src/Dates/fxAddDateParts.pq](../src/Dates/fxAddDateParts.pq) |
 | fxCombineTablesByPrefix | Dynamically finds and expands all Excel tables that start with a specific text. | [src/Dates/fxCombineTablesByPrefix.pq](../src/Dates/fxCombineTablesByPrefix.pq) |
+
+## Files
+
+| Function | Description | File |
+|----------|-------------|------|
+| fxCombineFolderFiles | Combines CSV/Excel files from a folder and adds a SourceFileName column. | [src/Files/fxCombineFolderFiles.pq](../src/Files/fxCombineFolderFiles.pq) |
+| fxExpandExcelSheets | Combines sheets from one Excel workbook into a single table. | [src/Files/fxExpandExcelSheets.pq](../src/Files/fxExpandExcelSheets.pq) |
 
 ## Info
 

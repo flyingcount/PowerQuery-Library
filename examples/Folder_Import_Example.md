@@ -1,20 +1,35 @@
 # Folder / multi-table import example
 
-This library currently focuses on **table transforms**. For folder combines, use native connectors, then apply cleansers from `src/`.
-
 ## Pattern: folder of Excel/CSV → clean
 
 ```powerquery
 let
-    Source = Folder.Files("C:\Data\Incoming"),
-    KeepCsv = Table.SelectRows(Source, each [Extension] = ".csv"),
-    Combined = Table.Combine(
-        List.Transform(KeepCsv[Content], each Csv.Document(_))
-    ),
-    Promoted = Table.PromoteHeaders(Combined, [PromoteAllScalars=true]),
-    Clean = fxCleanAllText(fxRemoveAllBlankRows(fxTrimColumnNames(Promoted)))
+    Combined = fxCombineFolderFiles("C:\Data\Incoming"),
+    Clean = fxCleanAllText(fxRemoveAllBlankRows(fxTrimColumnNames(Combined)))
 in
     Clean
+```
+
+CSV-only:
+
+```powerquery
+fxCombineFolderFiles("C:\Data\Incoming", {".csv"})
+```
+
+## Pattern: all sheets in one workbook
+
+```powerquery
+let
+    Combined = fxExpandExcelSheets("C:\Data\Sales.xlsx"),
+    Clean = fxNullIfBlank(fxTrimColumnNames(Combined))
+in
+    Clean
+```
+
+Sheets whose names contain `"Actual"`:
+
+```powerquery
+fxExpandExcelSheets("C:\Data\Sales.xlsx", "Actual")
 ```
 
 ## Pattern: workbook tables by prefix

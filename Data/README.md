@@ -2,7 +2,7 @@
 
 | File | Role |
 |------|------|
-| `Personal.xlsb` | Original Excel personal / function-library workbook |
+| `Personal123.xlsb` | Personal macro workbook (VBA + PQ); local only, gitignored |
 | `Section1.m` | Extracted Power Query mashup section (optional working copy) |
 
 To refresh individual `.pq` files after editing queries in Excel:

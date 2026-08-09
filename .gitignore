@@ -22,3 +22,8 @@ node_modules/
 Data/*.xlsb
 Data/*.xlsx
 Data/*.xlsm
+
+# VBA build artifacts / raw dumps
+vba/build/*.xlam
+vba/source/_export_raw/*
+!vba/source/_export_raw/README.md

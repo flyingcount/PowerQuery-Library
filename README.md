@@ -4,6 +4,8 @@ Reusable **Power Query (M)** functions for Excel and Power BI — cleansing, pro
 
 Originally curated in a personal workbook (`Data/Personal.xlsb`) and organised here as a GitHub-friendly source library.
 
+Power Query M lives under `src/`. VBA add-in source lives under `vba/` (see [vba/README.md](vba/README.md)).
+
 ## Repository layout
 
 ```text
@@ -11,17 +13,11 @@ Originally curated in a personal workbook (`Data/Personal.xlsb`) and organised h
 ├── README.md
 ├── CHANGELOG.md
 ├── LICENSE
-├── src/
-│   ├── CleanseColumns/
-│   ├── CleanseRows/
-│   ├── CleanseTables/
-│   ├── Info/
-│   ├── DataPreProcessing/
-│   ├── Dates/
-│   ├── ControlCharts/
-│   ├── Sampling/
-│   ├── AddColumn/
-│   └── MLEncoder/
+├── src/                    ← Power Query (.pq)
+├── vba/
+│   ├── docs/               ← export/import + module map
+│   ├── source/Api|Internal ← VBA (.bas) for .xlam library
+│   └── build/              ← local PowerQueryVbaLib.xlam
 ├── examples/
 ├── templates/
 ├── tests/
@@ -69,7 +65,8 @@ In this repo each function lives at:
 | `CleanseTables` | Table-wide null/`Text.Trim`/`Text.Clean` |
 | `Info` | Schema, profiling, allowed types |
 | `DataPreProcessing` | Metadata maps, type application, random sample |
-| `Dates` | Combine workbook tables by name prefix |
+| `Dates` | Date parts; combine workbook tables by name prefix |
+| `Files` | Combine folder CSV/Excel; expand workbook sheets |
 | `ControlCharts` | Calendar / date dimension generator |
 | `Sampling` | X̄–mR diagnostics & Western Electric rules |
 | `AddColumn` | Running total, % of category |

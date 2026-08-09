@@ -28,8 +28,9 @@ Group by capability, not by project:
 | `Sampling` | Sampling & diagnostic sampling |
 | `AddColumn` | Derived columns |
 | `MLEncoder` | Encoding for modelling prep |
+| `Files` | Folder / workbook ingestion helpers |
 
-Add a new folder only when a clear category emerges (e.g. `Files/`, `Validation/`).
+Add a new folder only when a clear category emerges (e.g. `Validation/`).
 
 ## Parameters
 
