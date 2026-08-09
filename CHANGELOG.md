@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - `fxCombineFolderFiles` (`src/Files/`) — combine CSV/Excel files from a folder with `SourceFileName`.
 - `fxExpandExcelSheets` (`src/Files/`) — append workbook sheets (optional name pattern) with `SourceSheet`.
 - `fxMasterDataV02` (`src/DataPreProcessing/`) — combine and deduplicate a key column from two queries into a text master list (resolve by trimmed header, blank/error cleanup, per-source then final distinct, sorted).
-
+- `fxMasterDataV03` (`src/DataPreProcessing/`) — same purpose as V02 using bulk `Table.*` ops; remove errors before distinct; trim text keys (prefer for large inputs).
 
 ### Changed
 - Moved VBA scaffold and Personal workbook material to [Excel-VBA-Library](https://github.com/flyingcount/Excel-VBA-Library).
