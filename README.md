@@ -17,7 +17,9 @@ Power Query M lives under `src/`. Excel VBA lives in a separate repo: [Excel-VBA
 ├── examples/
 ├── templates/
 ├── tests/
-└── docs/
+├── docs/
+├── prompts/                ← reusable Cursor prompts (GitHub-synced)
+└── .cursor/rules/          ← project rules, including prompt-library.mdc
 ```
 
 ## Quick start (Excel)
@@ -76,6 +78,7 @@ Full inventory: [docs/FunctionCatalog.md](docs/FunctionCatalog.md)
 - One function per `.pq` file; file name = function name.
 - Prefer typed parameters (`as table`, `as text`, …) and short header comments.
 - See [docs/NamingConvention.md](docs/NamingConvention.md) and [docs/CodingStandards.md](docs/CodingStandards.md).
+- Reusable Agent prompts live in [prompts/](prompts/README.md). The rule `.cursor/rules/prompt-library.mdc` governs how they are added, updated, and pushed to GitHub.
 
 ## Regenerating from the workbook
 

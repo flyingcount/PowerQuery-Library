@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- Prompt library under `prompts/` with a Cursor rule (`.cursor/rules/prompt-library.mdc`) for creating, cataloguing, and GitHub-syncing reusable prompts. Starter prompts: `add-function`, `harvest-prompt`, `review-pq-function`.
 - `fxNullIfBlank` (`src/CleanseTables/`) — replace empty or whitespace-only text with `null` (optional column list).
 - `fxAddDateParts` (`src/Dates/`) — add Year, Quarter, Month, Week, and day-of-week columns from a date/datetime field.
 - `fxCombineFolderFiles` (`src/Files/`) — combine CSV/Excel files from a folder with `SourceFileName`.

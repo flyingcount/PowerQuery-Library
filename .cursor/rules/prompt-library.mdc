@@ -1,0 +1,162 @@
+---
+description: Create and maintain the GitHub-synced prompt library under prompts/. Apply when adding, editing, cataloguing, harvesting, or retiring reusable prompts, Cursor commands, or agent skills.
+globs: prompts/**/*.md, .cursor/commands/**/*.md, .cursor/skills/**/SKILL.md
+alwaysApply: false
+---
+
+# Prompt library (GitHub-synced)
+
+This repository is the **source of truth** for reusable prompts. Chat history, User Rules, and local-only files are not the library. Anything worth repeating belongs in `prompts/`, committed, and pushed to GitHub.
+
+Follow `docs/NamingConvention.md` and `docs/CodingStandards.md` when a prompt tells Agent to change Power Query code.
+
+## Layout
+
+```text
+prompts/
+├── README.md              ← how to use the library
+├── CATALOG.md             ← index of every prompt (keep in sync)
+├── _template.md           ← copy this when adding a prompt
+├── power-query/           ← M / .pq authoring and review
+├── excel-power-bi/        ← Excel & Power BI Desktop workflows
+├── library-ops/           ← repo hygiene: add function, tests, catalog, changelog
+└── archive/               ← retired prompts (do not delete history)
+```
+
+| Kind | Location | Use for |
+|------|----------|---------|
+| Prompt | `prompts/<category>/<slug>.md` | Reusable chat text; `@`-mention or paste |
+| Project rule | `.cursor/rules/*.mdc` | Short standing constraints (this file) |
+| Skill | `.cursor/skills/<name>/SKILL.md` | Multi-step Agent workflow invoked with `/name` |
+| Slash command (legacy) | `.cursor/commands/<name>.md` | Prefer a skill instead |
+
+Do **not** store the canonical prompt body in `.cursor/rules/`. Rules point at `prompts/`; they do not duplicate it.
+
+## When to add a prompt
+
+Add or update a library prompt when any of these is true:
+
+- The same instruction was typed (or would be typed) more than once.
+- A review, ETL recipe, or library-ops checklist should be consistent across chats.
+- The user says “save this as a prompt”, “add to the library”, or “make this reusable”.
+- A chat produced a better procedure than the existing prompt — update in place; bump `updated`.
+
+Do **not** add a prompt for a one-off question, secrets, personal workbook paths, or content that already lives in `docs/`.
+
+## File conventions
+
+- **One prompt per file.** File name = kebab-case slug, no spaces: `review-pq-function.md`.
+- **Slug** matches the `id` in frontmatter.
+- **Category folder** is the primary grouping. Add a new folder only when an existing category does not fit.
+- **Keep each prompt under ~150 lines.** Split a long workflow into a prompt plus a skill, or into two prompts.
+
+### Frontmatter (required)
+
+Copy `prompts/_template.md`. Every prompt starts with:
+
+```yaml
+---
+id: review-pq-function
+title: Review a Power Query function
+category: power-query
+status: active
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
+tags: [review, m-language]
+tools: [agent]
+---
+```
+
+| Field | Rules |
+|-------|--------|
+| `id` | Unique, kebab-case, equals file stem |
+| `title` | Human title; used in `CATALOG.md` |
+| `category` | Folder name: `power-query`, `excel-power-bi`, `library-ops`, or `archive` |
+| `status` | `active` \| `draft` \| `retired` |
+| `created` / `updated` | ISO date (`YYYY-MM-DD`) |
+| `tags` | Short kebab-case labels; 2–6 |
+| `tools` | Where it is meant to run: `agent`, `inline-edit`, `chat` |
+
+Optional: `related` (list of other prompt `id`s), `skill` (path to a matching skill).
+
+### Body sections (required unless noted)
+
+1. **When to use** — trigger conditions; when *not* to use it.
+2. **Inputs** — what the user must provide or `@`-mention (`@src/...`, `@docs/...`).
+3. **Prompt** — the actual instruction text Agent should follow. Write it in the imperative, second person to the agent (“Read the function…”, “Do not…”).
+4. **Output** — expected shape of the reply (checklist, patch, test note, etc.).
+5. **Guardrails** — repo-specific constraints (optional if the Prompt section already has them).
+
+The `Prompt` section must be self-contained enough to paste into a new chat. Point at files with `@path` instead of pasting large code or docs.
+
+## Create / update / retire
+
+### Create
+
+1. Confirm no existing prompt covers the same job (`prompts/CATALOG.md` and a search under `prompts/`).
+2. Copy `prompts/_template.md` to `prompts/<category>/<slug>.md`.
+3. Fill frontmatter and body. Prefer concrete steps and examples from this repo over generic advice.
+4. Add a row to `prompts/CATALOG.md`.
+5. If the workflow is multi-step and should be slash-invoked, also add `.cursor/skills/<slug>/SKILL.md` that **references** the prompt file rather than copying it.
+6. Add a `CHANGELOG.md` entry under Unreleased → Added.
+
+### Update
+
+1. Edit the prompt in place. Set `updated` to today.
+2. If the title, category, or status changed, fix the `CATALOG.md` row.
+3. Do not silently change the prompt’s intent. If the job changed, create a new `id` and retire the old one.
+4. Changelog: Unreleased → Changed.
+
+### Retire
+
+1. Set `status: retired`, move the file to `prompts/archive/`, update `CATALOG.md`.
+2. Do not delete retired prompts; GitHub history plus `archive/` is the audit trail.
+3. Changelog: Unreleased → Removed (note the retirement).
+
+### Harvest from chat
+
+When the user has a working ad-hoc prompt:
+
+1. Extract the stable instructions (drop one-off names, data, and secrets).
+2. Parameterise inputs (`InputTable`, file path, function name).
+3. Save as a new library prompt and sync (below).
+
+## GitHub sync
+
+GitHub (`flyingcount/PowerQuery-Library`) is how the library is shared and backed up. Treat **push to `origin`** as sync.
+
+- **Never** keep the only copy of a prompt in Cursor User Rules, a local scratch file, or chat.
+- **Never** commit secrets, tokens, personal emails beyond what is already in the repo, or local paths such as `Data/*.xlsb` contents.
+- After creating or editing prompts in this session: stage, commit, and push the feature branch, then open or update the PR.
+- Commit message pattern: `Add prompt <id>.` / `Update prompt <id>.` / `Retire prompt <id>.`
+- One logical change per PR when possible (same standard as functions). Mixing a new `.pq` function and an unrelated prompt harvest is two PRs.
+- Pull before editing if the branch may be stale so catalog merges stay clean.
+- Cursor **Remote Rule (GitHub)** syncs `.mdc` files only. Prompts in `prompts/` travel with a normal git clone/pull, not that importer.
+
+## Quality bar
+
+A prompt is ready to commit when it is:
+
+- **Actionable** — numbered steps or a checklist, not slogans.
+- **Scoped** — one job; no “also rewrite the README” unless that is the job.
+- **Grounded** — names real folders (`src/<Category>/`, `tests/`, `docs/FunctionCatalog.md`).
+- **Safe** — no credentials; no destructive git commands; no rewriting generated extracts (`Data/Section1.m`) by hand.
+- **Idempotent** — running it twice should not duplicate catalog rows or files.
+
+## Do / don’t
+
+| Do | Don’t |
+|----|--------|
+| `@`-mention `prompts/<file>` when the user wants that workflow | Paste the full prompt into a rule |
+| Update `CATALOG.md` in the same change as the prompt | Leave orphan files or catalog rows |
+| Reuse `fx` naming and one-function-per-file rules | Invent a second library layout |
+| Prefer editing an existing prompt over adding a near-duplicate | Create `review-function-2.md` without retiring v1 |
+
+## Agent checklist (every prompt change)
+
+- [ ] File lives under `prompts/<category>/` with valid frontmatter
+- [ ] `id` equals the file stem; `updated` is today
+- [ ] `CATALOG.md` row added/updated/moved
+- [ ] `CHANGELOG.md` Unreleased note
+- [ ] No secrets or one-off personal data
+- [ ] Committed and pushed so GitHub matches the workspace
