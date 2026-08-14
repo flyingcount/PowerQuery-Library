@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to this library are documented in this file.
+All notable changes to **code-library** are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - `HolidaysList` (`src/Dates/`) — editable holidays table seeded with 2026 England & Wales bank holidays; used by `fxCreateDateTable` when Holidays is omitted.
 
 ### Changed
+- Renamed this repository from Power Query Library to **code-library** so the name covers prompts and other non–Power Query material as well as M functions.
 - Moved VBA scaffold and Personal workbook material to [Excel-VBA-Library](https://github.com/flyingcount/Excel-VBA-Library).
 
 ## [0.1.0] - 2026-08-08

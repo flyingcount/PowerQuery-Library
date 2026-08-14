@@ -25,7 +25,7 @@ tools: [agent]
 
 ## Prompt
 
-Review the attached Power Query function against this library’s conventions.
+Review the attached Power Query function against **code-library** conventions.
 
 Check, in order:
 

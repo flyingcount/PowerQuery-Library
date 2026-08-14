@@ -24,7 +24,7 @@ tools: [agent]
 
 ## Prompt
 
-You are working in the Power Query library at the repo root.
+You are working in **code-library** at the repo root.
 
 1. …
 2. …

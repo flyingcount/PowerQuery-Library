@@ -13,7 +13,7 @@ tools: [agent]
 
 ## When to use
 
-- The user wants a new reusable `fx*` function in this library.
+- The user wants a new reusable `fx*` function in **code-library**.
 - Do not use for one-off queries that belong only in a workbook, or for VBA (that lives in Excel-VBA-Library).
 
 ## Inputs
@@ -25,7 +25,7 @@ tools: [agent]
 
 ## Prompt
 
-Add one Power Query (M) function to this repository.
+Add one Power Query (M) function to **code-library**.
 
 1. Choose the `src/<Category>/` folder from `docs/NamingConvention.md`. Create a new folder only if no existing category fits.
 2. Name it `fx` + PascalCase verb-first (file name = function name + `.pq`). One function per file.

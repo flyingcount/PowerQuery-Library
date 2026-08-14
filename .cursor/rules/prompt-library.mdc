@@ -123,7 +123,7 @@ When the user has a working ad-hoc prompt:
 
 ## GitHub sync
 
-GitHub (`flyingcount/PowerQuery-Library`) is how the library is shared and backed up. Treat **push to `origin`** as sync.
+GitHub (`code-library`, this repository) is how the library is shared and backed up. Treat **push to `origin`** as sync.
 
 - **Never** keep the only copy of a prompt in Cursor User Rules, a local scratch file, or chat.
 - **Never** commit secrets, tokens, personal emails beyond what is already in the repo, or local paths such as `Data/*.xlsb` contents.

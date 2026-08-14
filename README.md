@@ -1,10 +1,14 @@
-# Power Query Library
+# Code Library
 
-Reusable **Power Query (M)** functions for Excel and Power BI — cleansing, profiling, metadata-driven typing, sampling, control-chart diagnostics, and encoding helpers.
+**code-library** — reusable code versioned on GitHub: Power Query (M) functions, Cursor prompts, and related helpers. This is no longer a Power Query–only repository.
 
 Originally curated in a personal workbook (`Data/Personal.xlsb`) and organised here as a GitHub-friendly source library.
 
-Power Query M lives under `src/`. Excel VBA lives in a separate repo: [Excel-VBA-Library](https://github.com/flyingcount/Excel-VBA-Library).
+| Area | Location |
+|------|----------|
+| Power Query (M) | `src/` |
+| Cursor prompts | `prompts/` |
+| Excel VBA | separate repo: [Excel-VBA-Library](https://github.com/flyingcount/Excel-VBA-Library) |
 
 ## Repository layout
 
@@ -22,7 +26,11 @@ Power Query M lives under `src/`. Excel VBA lives in a separate repo: [Excel-VBA
 └── .cursor/rules/          ← project rules, including prompt-library.mdc
 ```
 
-## Quick start (Excel)
+## Power Query
+
+Reusable **Power Query (M)** functions for Excel and Power BI — cleansing, profiling, metadata-driven typing, sampling, control-chart diagnostics, and encoding helpers.
+
+### Quick start (Excel)
 
 1. Open **Power Query Editor** (Data → Get Data / Transform).
 2. Create a **Blank Query** → Advanced Editor.
@@ -48,13 +56,13 @@ In this repo each function lives at:
 
 `src/<Category>/<FunctionName>.pq`
 
-## Quick start (Power BI Desktop)
+### Quick start (Power BI Desktop)
 
 1. Home → Transform data → New Source → Blank Query.
 2. Paste a function from `src/` into Advanced Editor.
 3. Use **Invoke Custom Function** or reference it from other queries in the same model.
 
-## Function categories
+### Function categories
 
 | Folder | Focus |
 |--------|--------|

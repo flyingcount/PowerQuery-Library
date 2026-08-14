@@ -1,6 +1,6 @@
 # Prompt library
 
-Reusable prompts for Cursor Agent, versioned in this repository and synced with GitHub.
+Reusable prompts for Cursor Agent, versioned in **code-library** and synced with GitHub.
 
 GitHub is the source of truth. Clone or pull this repo to get the latest prompts; do not keep the only copy in chat or User Rules.
 
@@ -25,6 +25,6 @@ Follow `.cursor/rules/prompt-library.mdc`. Short version:
 | Folder | Use for |
 |--------|---------|
 | `power-query/` | Authoring and reviewing M / `.pq` functions |
-| `excel-power-bi/` | Excel and Power BI Desktop workflows that use this library |
+| `excel-power-bi/` | Excel and Power BI Desktop workflows that use **code-library** |
 | `library-ops/` | Repo hygiene: new functions, tests, catalog, changelog, harvesting prompts |
 | `archive/` | Retired prompts (keep for history) |
