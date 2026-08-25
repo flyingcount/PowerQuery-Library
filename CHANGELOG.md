@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- `fxChangeTypeNoErrors` (`src/DataPreProcessing/`) — apply `Table.TransformColumnTypes` only to columns that exist; skip missing names without error (Chandeep Chhabra).
 - `fxNullIfBlank` (`src/CleanseTables/`) — replace empty or whitespace-only text with `null` (optional column list).
 - `fxAddDateParts` (`src/Dates/`) — add Year, Quarter, Month, Week, and day-of-week columns from a date/datetime field.
 - `fxCombineFolderFiles` (`src/Files/`) — combine CSV/Excel files from a folder with `SourceFileName`.
