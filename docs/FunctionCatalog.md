@@ -1,6 +1,6 @@
 # Function Catalog
 
-Generated from the Power Query library source files. Each entry links to its .pq file.
+Generated from the Power Query (`src/`) files in **code-library**. Each entry links to its `.pq` file.
 
 **Total functions:** 39
 
